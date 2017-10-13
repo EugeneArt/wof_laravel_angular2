@@ -1,0 +1,53 @@
+<div>
+    <h1>Поиск расписания</h1>
+    <form role="form" [formGroup]="form" (ngSubmit)="save()">
+        <div class= "form-group">
+            <select formControlName="day"
+                    [(ngModel)]="filter.day">
+                <option *ngFor="let day of days" [ngValue]="day">{{day}}</option>
+            </select>
+        </div>
+        <div class= "form-group">
+            <label for="hour"
+                   [class.active]="filter.hour"
+                   data-error="Name is required and needs to contain at least 3 chars"> Время </label>
+            <div>
+                <input  [(ngModel)]="filter.hour"
+                        formControlName="hour"
+                        pattern="([01]?[0-9]{1}|2[0-3]{1}):[0-5]{1}[0-9]{1}"
+                        placeholder="HH:mm" min="00:00" max="23:00"
+                        class= "form-control"/>
+            </div>
+        </div>
+        <div class= "form-group">
+            <select formControlName="gym_id"
+                    [(ngModel)]="filter.gym_id">
+                <option *ngFor="let gym of gyms" [ngValue]="gym.id">{{gym.gym_name}}</option>
+            </select>
+        </div>
+        <div class= "form-group">
+            <select formControlName="exercise_id"
+                    [(ngModel)]="filter.exercise_id">
+                <option *ngFor="let exercise of exercises" [ngValue]="exercise.id">{{exercise.exercise_name}}</option>
+            </select>
+        </div>
+        <div class= "form-group">
+            <select formControlName="level_id"
+                    [(ngModel)]="filter.level_id">
+                <option *ngFor="let level of levels" [ngValue]="level.id">{{level.level_name}}</option>
+            </select>
+        </div>
+        <div class= "form-group">
+            <select formControlName="trainer_id"
+                    [(ngModel)]="filter.trainer_id">
+                <option *ngFor="let trainer of trainers" [ngValue]="trainer.id">{{trainer.trainer_name}}</option>
+            </select>
+        </div>
+
+        <a routerLink="/main/filter/index" class="btn btn-default">Отмена</a>
+        <button class="btn waves-effect waves-light" type="submit">
+            Поиск
+            <i class="material-icons right"></i>
+        </button>
+    </form>
+</div>

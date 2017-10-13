@@ -1,0 +1,33 @@
+<div>
+    <h1>Баннеры: редактировать баннер</h1>
+    <form role="form" [formGroup]="form" (ngSubmit)="save()">
+        <div class= "form-group">
+            <label for="name"
+                   [class.active]="banner.name"
+                   data-error="Name is required and needs to contain at least 3 chars"> Название баннера </label>
+            <div>
+                <input  [(ngModel)]="banner.name"
+                        formControlName="name"
+                        [class.invalid]="form.controls['name'].touched && !form.controls['name'].valid"
+                        class= "form-control" placeholder="Название баннера" required/>
+                <span ng-show="form.name.$dirty && myForm.name.$invalid" class="help-inline">Название баннера обязательно</span>
+            </div>
+        </div>
+        <form>
+            <h2>Изображение баннера</h2>
+            <img *ngIf="banner.image_url"
+                 [src]="banner.image_url">
+            <input type="file" class="form-control" name="file" ng2FileSelect [uploader]="uploader" />
+            <button type="button" class="btn btn-success btn-s"
+                    (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                <span class="glyphicon glyphicon-upload"></span> Загрузить баннер
+            </button>
+        </form>
+        <a routerLink="/admin/trainers" class="btn btn-default">Отмена</a>
+        <button class="btn waves-effect waves-light" type="submit"
+                [disabled]="!form.valid">
+            Выполнить
+            <i class="material-icons right"></i>
+        </button>
+    </form>
+</div>

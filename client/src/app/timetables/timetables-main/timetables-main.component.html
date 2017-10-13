@@ -1,0 +1,8 @@
+<app-tabs>
+    <tab *ngFor="let timetable of timetables" tabTitle="{{timetable.key}}" >
+        <app-timetable-main-gym [timetable]="timetable.value"></app-timetable-main-gym>
+    </tab>
+    <tab tabTitle="Все залы" >
+        <app-timetable-main-all-gyms [timetables]="timetables"></app-timetable-main-all-gyms>
+    </tab>
+</app-tabs>

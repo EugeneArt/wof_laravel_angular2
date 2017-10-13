@@ -1,0 +1,73 @@
+<div>
+    <h1>Упражнения: редактировать упражнение</h1>
+    <form role="form" [formGroup]="form" (ngSubmit)="save()">
+        <div class= "form-group">
+            <label for="exercise_name"
+                   [class.active]="exercise.exercise_name"
+                   data-error="Name is required and needs to contain at least 3 chars"> Название упражнения </label>
+            <div>
+                <input  [(ngModel)]="exercise.exercise_name"
+                        formControlName="exercise_name"
+                        [class.invalid]="form.controls['exercise_name'].touched && !form.controls['exercise_name'].valid"
+                        class= "form-control" placeholder="Название тренера" required/>
+                <span ng-show="form.exercise_name.$dirty && form.exercise_name.$invalid" class="help-inline">Название упражнения обязательно</span>
+            </div>
+        </div>
+        <div class= "form-group">
+            <label for="exercise_description"
+                   [class.active]="exercise.exercise_description"> Описание занятия
+            </label>
+            <div>
+                <textarea  [(ngModel)]="exercise.exercise_description"
+                           formControlName="exercise_description"
+                           [class.invalid]="form.controls['exercise_description'].touched && !form.controls['exercise_description'].valid"
+                           class= "form-control" placeholder="Описание">
+                </textarea>
+            </div>
+        </div>
+        <form>
+            <h2>Видео</h2>
+            <video *ngIf="exercise.exercise_video"
+                    width="320"
+                    height="240"
+                    controls>
+                <source [src]="exercise.exercise_video">
+            </video>
+            <input type="file" class="form-control" name="file" ng2FileSelect [uploader]="uploader" />
+            <button type="button" class="btn btn-success btn-s"
+                    (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                <span class="glyphicon glyphicon-upload"></span> Загрузить видео
+            </button>
+        </form>
+        <form>
+            <h2>Изображения</h2>
+            <ul *ngFor="let image of exercise.images">
+                <li><img [src]="image"> <span *ngIf="image.id" (click)="deleteImage(image)"> Удалить</span></li>
+            </ul>
+            <input type="file" class="form-control" name="file" ng2FileSelect [uploader]="uploaderForImages" />
+            <ul *ngFor="let item of uploaderForImages.queue">
+                <li>
+                    {{ item?.file?.name }}
+                    <button type="button" class="btn btn-success btn-xs"
+                            (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                        <span class="glyphicon glyphicon-upload"></span> Загрузить
+                    </button>
+                    <button type="button" class="btn btn-danger btn-xs"
+                            (click)="item.remove()">
+                        <span class="glyphicon glyphicon-trash"></span> Удалить
+                    </button>
+                </li>
+            </ul>
+            <button type="button" class="btn btn-success btn-s"
+                    (click)="uploaderForImages.uploadAll()" [disabled]="!uploaderForImages.getNotUploadedItems().length">
+                <span class="glyphicon glyphicon-upload"></span> Загрузить все изображения
+            </button>
+        </form>
+        <a routerLink="/admin/exercises" class="btn btn-default">Отмена</a>
+        <button class="btn waves-effect waves-light" type="submit"
+                [disabled]="!form.valid">
+            Выполнить
+            <i class="material-icons right"></i>
+        </button>
+    </form>
+</div>

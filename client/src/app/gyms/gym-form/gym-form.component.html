@@ -1,0 +1,24 @@
+<div>
+    <h1>Залы: редактировать зал</h1>
+
+    <form role="form" [formGroup]="form" (ngSubmit)="save()">
+        <div class= "form-group">
+            <label for="gym_name"
+                   [class.active]="gym.gym_name"
+                   data-error="Name is required and needs to contain at least 3 chars"> Название зала </label>
+            <div>
+                <input  [(ngModel)]="gym.gym_name"
+                        formControlName="gym_name"
+                        [class.invalid]="form.controls['gym_name'].touched && !form.controls['gym_name'].valid"
+                        class= "form-control" placeholder="Название зала" required/>
+                <span ng-show="myForm.gym_name.$dirty && myForm.gym_name.$invalid" class="help-inline">Название зала обязательно</span>
+            </div>
+        </div>
+        <a [routerLink]="['/']" class="btn btn-default">Отмена</a>
+        <button class="btn waves-effect waves-light" type="submit"
+                [disabled]="!form.valid">
+            Выполнить
+            <i class="material-icons right"></i>
+        </button>
+    </form>
+</div>

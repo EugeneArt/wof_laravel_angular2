@@ -1,0 +1,8 @@
+<a class="btn btn-primary" [routerLink]="['new']">
+    <i class="glyphicon glyphicon-plus"></i> Добавить расписание
+</a>
+<app-tabs>
+    <tab *ngFor="let timetable of timetables" tabTitle="{{timetable.key}}" >
+        <app-timetable-gym [timetable]="timetable.value"></app-timetable-gym>
+    </tab>
+</app-tabs>

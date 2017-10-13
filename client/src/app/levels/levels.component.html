@@ -1,0 +1,31 @@
+<div>
+  <h1>Редактировать уровень сложности</h1>
+  <p>
+    <a class="btn btn-primary" routerLink="new">
+      <i class="glyphicon glyphicon-plus"></i> Добавить уровень сложности
+    </a>
+  </p>
+  <div >
+    <table class="table">
+      <thead>
+      <th>Уровень сложности</th>
+      <th>Цвет</th>
+      <th style="width:200px;">Редактировать/Удалить</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let level of levels">
+        <td>{{level.level_name}}</td>
+        <td> {{level.level_color}}<div class="level-color" style="width: 20px; height: 20px;background: {{level.level_color}}"></div></td>
+        <td>
+          <a class="btn btn-primary btn-xs" [routerLink]="[level.id]">
+            <i class="glyphicon glyphicon-pencil">Редактировать</i>
+          </a>
+          <a class="btn btn-danger btn-xs" (click)="deleteLevel(level)">
+            <i class="glyphicon glyphicon-trash">Удалить</i>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

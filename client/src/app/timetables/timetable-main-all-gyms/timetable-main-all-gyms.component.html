@@ -1,0 +1,27 @@
+
+<table class="table" *ngFor="let timetable of timetables">
+    <caption>{{timetable.key}}</caption>
+    <thead>
+    <td>Время</td>
+    <td *ngFor="let day of days">{{day}}</td>
+    </thead>
+    <tbody>
+    <tr *ngFor="let hourGroup of timetable.value | groupBy: 'hour'">
+        <td>{{hourGroup.key}}</td>
+        <td *ngFor="let day of days">
+            <div *ngFor="let item of hourGroup.value">
+                <div *ngIf="item.day === day">
+                    <div>{{item.hour}}</div>
+                    <div>{{item.exercises.exercise_name}}</div>
+                    <div *ngIf="item.trainers">
+                        <span *ngFor="let trainer of item.trainers">
+                            {{trainer.trainer_name}}
+                        </span>
+                    </div>
+                    <div class="level-color_circle" style="background: {{item.levels.level_color}}"></div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>

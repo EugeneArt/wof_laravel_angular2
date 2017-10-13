@@ -1,0 +1,57 @@
+<div>
+    <h1>Тренеры: редактировать тренера</h1>
+    <form role="form" [formGroup]="form" (ngSubmit)="save()">
+        <div class= "form-group">
+            <label for="trainer_name"
+                   [class.active]="trainer.trainer_name"
+                   data-error="Name is required and needs to contain at least 3 chars"> Название тренера </label>
+            <div>
+                <input  [(ngModel)]="trainer.trainer_name"
+                        formControlName="trainer_name"
+                        [class.invalid]="form.controls['trainer_name'].touched && !form.controls['trainer_name'].valid"
+                        class= "form-control" placeholder="Название тренера" required/>
+                <span ng-show="myForm.trainer_name.$dirty && myForm.trainer_name.$invalid" class="help-inline">Название тренера обязательно</span>
+            </div>
+        </div>
+        <div class= "form-group">
+            <label for="trainer_tagline"
+                   [class.active]="trainer.trainer_tagline"> Название тренера
+            </label>
+            <div>
+                <textarea  [(ngModel)]="trainer.trainer_tagline"
+                        formControlName="trainer_tagline"
+                        [class.invalid]="form.controls['trainer_tagline'].touched && !form.controls['trainer_tagline'].valid"
+                        class= "form-control" placeholder="Слоган">
+                </textarea>
+            </div>
+        </div>
+        <div class= "form-group">
+            <label for="trainer_achievements"
+                   [class.active]="trainer.trainer_achievements"> Название тренера </
+            label>
+            <div>
+                <textarea  [(ngModel)]="trainer.trainer_achievements"
+                           formControlName="trainer_achievements"
+                           [class.invalid]="form.controls['trainer_achievements'].touched && !form.controls['trainer_achievements'].valid"
+                           class= "form-control" placeholder="Достижения">
+                </textarea>
+            </div>
+        </div>
+        <form>
+            <h2>Фотография тренера</h2>
+            <img *ngIf="trainer.trainer_img"
+                 [src]="trainer.trainer_img">
+            <input type="file" class="form-control" name="file" ng2FileSelect [uploader]="uploader" />
+            <button type="button" class="btn btn-success btn-s"
+                    (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                <span class="glyphicon glyphicon-upload"></span> Загрузить фотографию тренера
+            </button>
+        </form>
+        <a routerLink="/admin/trainers" class="btn btn-default">Отмена</a>
+        <button class="btn waves-effect waves-light" type="submit"
+                [disabled]="!form.valid">
+            Выполнить
+            <i class="material-icons right"></i>
+        </button>
+    </form>
+</div>

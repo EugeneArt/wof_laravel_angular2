@@ -1,0 +1,28 @@
+<div>
+  <p>
+    <a class="btn btn-primary" routerLink="new">
+      <i class="glyphicon glyphicon-plus"></i> Добавить отзыв
+    </a>
+  </p>
+  <h1>Оставленные отзывы</h1>
+  <div>
+    <table class="table">
+      <thead>
+      <th>Фамилия</th>
+      <th>Отзыв</th>
+      <th style="width:80px;">Удалить</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let comment of comments">
+        <td>{{comment.name}}</td>
+        <td>{{comment.comment}}</td>
+        <td>
+          <a class="btn btn-danger btn-xs" (click)="deleteComment(comment)">
+            <i class="glyphicon glyphicon-trash">Удалить</i>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

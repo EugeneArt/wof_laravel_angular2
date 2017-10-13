@@ -1,0 +1,38 @@
+<div>
+  <h1>Редактировать тренеров</h1>
+  <p>
+    <a class="btn btn-primary" [routerLink]="['new']">
+      <i class="glyphicon glyphicon-plus"></i> Добавить тренера
+    </a>
+  </p>
+
+  <div ng-show="trainers.length > 0">
+    <table class="table">
+      <thead>
+      <th>Тренер</th>
+      <th>Достижения</th>
+      <th>Слоган</th>
+      <th>Фото</th>
+      <th style="width:200px;">Редактировать/Удалить</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let trainer of trainers">
+        <td>{{trainer.trainer_name}}</td>
+        <td>{{trainer.trainer_achievements}}</td>
+        <td>{{trainer.trainer_tagline}}</td>
+        <td>
+          <img [src]="trainer.trainer_img" alt="">
+        </td>
+        <td>
+          <a class="btn btn-primary btn-xs"  [routerLink]="['trainer', trainer.id]">
+            <i class="glyphicon glyphicon-pencil">Редактировать</i>
+          </a>
+          <a class="btn btn-danger btn-xs" (click)="deleteTrainer(trainer)">
+            <i class="glyphicon glyphicon-trash">Удалить</i>
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
